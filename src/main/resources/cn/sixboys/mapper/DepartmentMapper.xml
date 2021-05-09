@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wfq.ssm.mapper.DepartmentMapper">
+<select id="listAll" resultType="department">
+    select * from department
+    </select>
+
+    <delete id="deleteByid">
+        delete from department where id= #{id}
+    </delete>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="department">
+        insert into department(name,sn) values(#{name},#{sn})
+    </insert>
+
+    <update id="update">
+        update department
+<set>
+    <if test="name!=null">
+        name =#{name},
+    </if>
+    <if test="sn!=null">
+         sn =#{sn}
+    </if>
+
+</set>
+        where id =#{id}
+    </update>
+
+</mapper>
