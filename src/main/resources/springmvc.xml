@@ -26,5 +26,9 @@
         <property name="suffix" value=".jsp"/>
     </bean>
 
+    <mvc:cors>
+        <mvc:mapping path="/**" />
+    </mvc:cors>
+
     <import resource="bean.xml"/>
 </beans>

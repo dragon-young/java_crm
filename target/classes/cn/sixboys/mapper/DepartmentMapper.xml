@@ -29,14 +29,4 @@
         where id =#{id}
     </update>
 
-<!--查询总条数-->
-    <select id="queryForCount" resultType="int">
-        select count(*) from department
-    </select>
-
-<!--    查询当前页显示条数-->
-    <select id="queryForList" resultType="department">
-        select * from department limt #{start}, #{pageSize}
-    </select>
-
 </mapper>

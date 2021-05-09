@@ -1,9 +1,11 @@
-package cn.wfq.ssm.service;
+package cn.sixboys.service;
 
-import cn.wfq.ssm.domain.Department;
+
+import cn.sixboys.domain.Department;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
 public interface IDepartmentService {
 
