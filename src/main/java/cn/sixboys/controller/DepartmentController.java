@@ -3,6 +3,8 @@ package cn.sixboys.controller;
 import cn.sixboys.domain.Department;
 import cn.sixboys.domain.JsonResult;
 import cn.sixboys.service.IDepartmentService;
+import cn.sixboys.util.PageResult;
+import cn.sixboys.util.QueryObject;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,14 +22,19 @@ public class DepartmentController {
     private IDepartmentService iDepartmentService;
 
     /**
-     * 查询所有
+     * 查询判断部门信息是否重复
      * @return
      */
-    @RequestMapping("/listAll")
+    @RequestMapping("/select")
     @ResponseBody
-    public JsonResult getListAll(){
-        List<Department> departments = iDepartmentService.listAll();
-        return new JsonResult(true, "查询成功", departments);
+    public JsonResult getSelect(Department department){
+
+        int select = iDepartmentService.select(department);
+        if(select > 0) {
+            return new JsonResult(false, "用户名或密码已存在");
+        }
+        return new JsonResult(true, "插入成功");
+
     }
 
     /**
@@ -65,6 +72,33 @@ public class DepartmentController {
     public JsonResult update(Department department){
         iDepartmentService.update(department);
         return new JsonResult(true,"修改成功");
+    }
+
+    /**
+     * 分页查询
+     * @param pageSize
+     * @param currentPage
+     * @return
+     */
+    @RequestMapping("/query")
+    @ResponseBody
+    public JsonResult query(Integer pageSize, Integer currentPage){
+
+
+        if (pageSize==null){
+            pageSize=4;
+        }
+
+        if (currentPage==null){
+            currentPage=1;
+        }
+        QueryObject queryObject = new QueryObject();
+        queryObject.setPageSize(pageSize);
+        queryObject.setCurrentPage(currentPage);
+        PageResult<Department> query = iDepartmentService.query(queryObject);
+        return new JsonResult(true,"查询成功",query);
+
+
     }
 
 

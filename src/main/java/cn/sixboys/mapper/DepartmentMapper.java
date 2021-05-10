@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DepartmentMapper {
 
-    List<Department> listAll();
+    int select(Department department);
 
     void deleteByid(Long id);
 

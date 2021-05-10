@@ -7,6 +7,8 @@ public class QueryObject {
     // 每页显示条数（需要给默认值）
     private int pageSize = 4;
 
+    private int start = 0;
+
     // 用于 Limit 子句第一个 ? 取值
     public int getStart(){
         return (currentPage - 1) * pageSize;

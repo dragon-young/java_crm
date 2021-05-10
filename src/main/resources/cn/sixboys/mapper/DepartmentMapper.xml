@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sixboys.mapper.DepartmentMapper">
-<select id="listAll" resultType="department">
-    select * from department
+<select id="select" resultType="int">
+    select count(*) from department where name  = #{name} or sn = #{sn}
     </select>
 
     <delete id="deleteByid">
@@ -36,7 +36,7 @@
 
 <!--    查询当前页显示条数-->
     <select id="queryForList" resultType="department">
-        select * from department limt #{start}, #{pageSize}
+        SELECT * FROM department LIMIT #{start}, #{pageSize}
     </select>
 
 </mapper>
