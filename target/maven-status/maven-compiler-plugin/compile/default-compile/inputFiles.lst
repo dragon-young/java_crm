@@ -1,0 +1,14 @@
+E:\idea\crm\src\main\java\cn\sixboys\service\IDepartmentService.java
+E:\idea\crm\src\main\java\cn\sixboys\domain\JsonResult.java
+E:\idea\crm\src\main\java\cn\sixboys\service\IPermissionService.java
+E:\idea\crm\src\main\java\cn\sixboys\util\PageResult.java
+E:\idea\crm\src\main\java\cn\sixboys\util\RequiredPermission.java
+E:\idea\crm\src\main\java\cn\sixboys\service\impl\PermissionServiceImpl.java
+E:\idea\crm\src\main\java\cn\sixboys\mapper\DepartmentMapper.java
+E:\idea\crm\src\main\java\cn\sixboys\controller\DepartmentController.java
+E:\idea\crm\src\main\java\cn\sixboys\domain\Permission.java
+E:\idea\crm\src\main\java\cn\sixboys\service\impl\DepartmentServiceImpl.java
+E:\idea\crm\src\main\java\cn\sixboys\mapper\PermissionMapper.java
+E:\idea\crm\src\main\java\cn\sixboys\domain\Department.java
+E:\idea\crm\src\main\java\cn\sixboys\controller\PermissionController.java
+E:\idea\crm\src\main\java\cn\sixboys\util\QueryObject.java
