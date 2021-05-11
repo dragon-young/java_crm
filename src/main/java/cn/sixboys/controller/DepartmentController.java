@@ -1,24 +1,23 @@
 package cn.sixboys.controller;
 
 import cn.sixboys.domain.Department;
+import cn.sixboys.domain.Employee;
 import cn.sixboys.domain.JsonResult;
 import cn.sixboys.service.IDepartmentService;
 import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.print.attribute.standard.PrinterURI;
+import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
 
-    @Autowired
+    @Resource
     private IDepartmentService iDepartmentService;
 
     /**
@@ -43,7 +42,7 @@ public class DepartmentController {
      * @return
      */
     @RequestMapping("/delete")
-@ResponseBody
+    @ResponseBody
     public JsonResult delete(Long id){
         iDepartmentService.delete(id);
         return new JsonResult(true,"删除成功");
@@ -83,12 +82,9 @@ public class DepartmentController {
     @RequestMapping("/query")
     @ResponseBody
     public JsonResult query(Integer pageSize, Integer currentPage){
-
-
         if (pageSize==null){
             pageSize=4;
         }
-
         if (currentPage==null){
             currentPage=1;
         }
@@ -97,9 +93,12 @@ public class DepartmentController {
         queryObject.setCurrentPage(currentPage);
         PageResult<Department> query = iDepartmentService.query(queryObject);
         return new JsonResult(true,"查询成功",query);
-
-
     }
 
-
+    @RequestMapping("/selectAll")
+    @ResponseBody
+    public JsonResult selectAll(Department department){
+        List<Department> departments = iDepartmentService.selectAll(department);
+        return new JsonResult(true,"查询成功", departments);
+    }
 }

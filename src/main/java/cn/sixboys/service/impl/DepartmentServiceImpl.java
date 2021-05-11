@@ -57,4 +57,10 @@ public class DepartmentServiceImpl implements IDepartmentService {
         return new PageResult<>(queryObject.getCurrentPage(),queryObject.getPageSize(),totalCount,departments);
 
     }
+
+    @Override
+    public List<Department> selectAll(Department department) {
+        List<Department> departments = departmentMapper.selectAll(department);
+        return departments;
+    }
 }
