@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+
 @Component
 public interface IDepartmentService {
 
@@ -25,4 +26,6 @@ public interface IDepartmentService {
      * @return
      */
     PageResult<Department> query(QueryObject queryObject);
+
+    List<Department> selectAll(Department department);
 }

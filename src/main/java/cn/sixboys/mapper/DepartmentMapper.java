@@ -4,6 +4,7 @@ import cn.sixboys.util.QueryObject;
 
 
 import java.util.List;
+import java.util.logging.Level;
 
 public interface DepartmentMapper {
 
@@ -27,5 +28,7 @@ public interface DepartmentMapper {
      * @param queryObject
      * @return
      */
-    List<Department>queryForList(QueryObject queryObject);
+    List<Department> queryForList(QueryObject queryObject);
+
+    List<Department> selectAll(Department department);
 }

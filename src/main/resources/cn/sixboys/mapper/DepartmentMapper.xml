@@ -38,5 +38,7 @@
     <select id="queryForList" resultType="department">
         SELECT * FROM department LIMIT #{start}, #{pageSize}
     </select>
-
+    <select id="selectAll" resultType="department">
+        select id,name from department
+    </select>
 </mapper>
