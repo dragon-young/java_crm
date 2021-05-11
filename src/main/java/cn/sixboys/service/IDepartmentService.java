@@ -6,8 +6,6 @@ import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public interface IDepartmentService {
 

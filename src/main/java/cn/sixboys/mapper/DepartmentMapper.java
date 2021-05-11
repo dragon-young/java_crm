@@ -1,6 +1,7 @@
 package cn.sixboys.mapper;
 import cn.sixboys.domain.Department;
 import cn.sixboys.util.QueryObject;
+import org.springframework.stereotype.Repository;
 
 
 import java.util.List;

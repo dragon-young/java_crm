@@ -1,8 +1,14 @@
 cn\sixboys\domain\Department.class
+cn\sixboys\domain\Permission.class
 cn\sixboys\util\PageResult.class
 cn\sixboys\util\QueryObject.class
 cn\sixboys\domain\JsonResult.class
+cn\sixboys\service\IPermissionService.class
 cn\sixboys\mapper\DepartmentMapper.class
 cn\sixboys\service\impl\DepartmentServiceImpl.class
+cn\sixboys\mapper\PermissionMapper.class
 cn\sixboys\service\IDepartmentService.class
+cn\sixboys\util\RequiredPermission.class
 cn\sixboys\controller\DepartmentController.class
+cn\sixboys\service\impl\PermissionServiceImpl.class
+cn\sixboys\controller\PermissionController.class

@@ -5,20 +5,17 @@ import cn.sixboys.domain.JsonResult;
 import cn.sixboys.service.IDepartmentService;
 import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
-import com.fasterxml.jackson.databind.JsonNode;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.sixboys.util.RequiredPermission;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.print.attribute.standard.PrinterURI;
-import java.util.List;
+import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
-
-    @Autowired
+    @Resource
     private IDepartmentService iDepartmentService;
 
     /**
@@ -42,6 +39,7 @@ public class DepartmentController {
      * @param id
      * @return
      */
+    @RequiredPermission(nane = "部门删除",expression = "department:delete")
     @RequestMapping("/delete")
 @ResponseBody
     public JsonResult delete(Long id){
@@ -54,6 +52,7 @@ public class DepartmentController {
      * @param department
      * @return
      */
+    @RequiredPermission(nane = "部门新增",expression = "department:input")
     @RequestMapping("/input")
     @ResponseBody
     public JsonResult input(Department department){
@@ -67,6 +66,7 @@ public class DepartmentController {
      * @param department
      * @return
      */
+    @RequiredPermission(nane = "部门修改",expression = "department:update")
     @RequestMapping("/update")
     @ResponseBody
     public JsonResult update(Department department){
@@ -80,6 +80,7 @@ public class DepartmentController {
      * @param currentPage
      * @return
      */
+    @RequiredPermission(nane = "部门页面",expression = "department:query")
     @RequestMapping("/query")
     @ResponseBody
     public JsonResult query(Integer pageSize, Integer currentPage){
