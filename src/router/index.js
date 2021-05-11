@@ -1,14 +1,29 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../components/Home.vue'
+import Department from '../components/systemmanager/Department.vue'
+import Employee from '../components/systemmanager/Employee.vue'
+import EditEmployee from '../components/systemmanager/EditEmployee.vue'
+import Authority from '../components/systemmanager/Authority.vue'
+import Role from '../components/systemmanager/Role.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect: '/sys'
+  },
+  {
+    path: '/sys',
+    component: Home,
+    children: [
+      { path: '/sys/department', component: Department },
+      { path: '/sys/employee', component: Employee },
+      { path: '/sys/employee/edit', component: EditEmployee },
+      { path: '/sys/authority', component: Authority },
+      { path: '/sys/role', component: Role }
+    ]
   },
   {
     path: '/about',

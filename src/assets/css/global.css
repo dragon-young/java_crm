@@ -1,0 +1,17 @@
+html, body, #app{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.el-header {
+    background-color: #409EFF;
+}
+
+.el-breadcrumb {
+    margin-bottom: 20px;
+}
+
+.el-cascader-menu {
+    height: 280px;
+}  

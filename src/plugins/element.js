@@ -1,4 +1,84 @@
 import Vue from 'vue'
-import { Button } from 'element-ui'
+import
+{
+  Button,
+  Form,
+  FormItem,
+  Input,
+  Option,
+  Select,
+  Message,
+  Container,
+  Header,
+  Aside,
+  Main,
+  Menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup,
+  Tabs,
+  TabPane,
+  Card,
+  Breadcrumb,
+  BreadcrumbItem,
+  Row,
+  Col,
+  Cascader,
+  Alert,
+  MessageBox,
+  RadioGroup,
+  RadioButton,
+  DatePicker,
+  Table,
+  TableColumn,
+  Pagination,
+  Switch,
+  Dialog,
+  Steps,
+  Step,
+  Checkbox,
+  Transfer,
+  Radio,
+  Upload
+}
+  from 'element-ui'
 
+Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
 Vue.use(Button)
+Vue.use(Form)
+Vue.use(FormItem)
+Vue.use(Input)
+Vue.use(Option)
+Vue.use(Select)
+Vue.use(Container)
+Vue.use(Header)
+Vue.use(Aside)
+Vue.use(Main)
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(Card)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Row)
+Vue.use(Col)
+Vue.use(Cascader)
+Vue.use(Alert)
+Vue.use(RadioGroup)
+Vue.use(RadioButton)
+Vue.use(DatePicker)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Pagination)
+Vue.use(Switch)
+Vue.use(Dialog)
+Vue.use(Steps)
+Vue.use(Step)
+Vue.use(Checkbox)
+Vue.use(Transfer)
+Vue.use(Radio)
+Vue.use(Upload)
