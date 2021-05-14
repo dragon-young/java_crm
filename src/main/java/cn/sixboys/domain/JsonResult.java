@@ -1,5 +1,9 @@
 package cn.sixboys.domain;
 
+/**
+ * 返回json对象实体类
+ * @author FuqiangWu
+ */
 public class JsonResult {
 
         private boolean success;

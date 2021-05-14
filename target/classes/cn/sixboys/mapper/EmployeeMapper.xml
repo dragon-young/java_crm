@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sixboys.mapper.EmployeeMapper">
+    <resultMap id="baseResultMap" type="employee">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="age" property="age"/>
+        <result column="deptId" property="deptId"/>
+        <result column="hireDate" property="hireDate"/>
+        <result column="state" property="state"/>
+        <result column="admin" property="admin"/>
+        <result column="roleId" property="roleId"/>
+        <result column="d_id" property="department.id"/>
+        <result column="d_name" property="department.name"/>
+        <result column="d_sn" property="department.sn"/>
+    </resultMap>
+    <select id="queryForList" resultMap="baseResultMap">
+        select e.id,e.name,e.password,e.email,e.age,e.deptId,e.hireDate,e.state,e.admin,e.roleId,
+        d.id as d_id,d.name as d_name,d.sn as d_sn
+        from employee as e inner join department as d on e.deptId=d.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (e.name like concat('%',#{keyword},'%') or e.email like concat('%',#{keyword},'%'))
+            </if>
+            <if test="deptId != null">
+                and e.deptId = #{deptId}
+            </if>
+<!--            <if test="employeeId != null">-->
+<!--                and e.id = #{employeeId}-->
+<!--            </if>-->
+        </where>
+        LIMIT #{start}, #{pageSize}
+    </select>
+    <select id="selectOne" resultType="employee">
+        select * from employee where id=#{id}
+    </select>
+    <delete id="delete">
+        delete from employee where id=#{id}
+    </delete>
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into employee(id,name,password,email,age,deptId,hireDate,state,admin,roleId)
+        values (#{id},#{name},#{password},#{email},#{age},#{deptId},#{hireDate},#{state},#{admin},#{roleId})
+    </insert>
+    <update id="update">
+        update employee
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age},
+            </if>
+            <if test="deptId != null and deptId != ''">
+                deptId = #{deptId},
+            </if>
+            <if test="hireDate != null and hireDate != ''">
+                hireDate = #{hireDate},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+            <if test="admin != null and admin != ''">
+                admin = #{admin},
+            </if>
+            <if test="roleId != null and roleId != ''">
+                roleId = #{roleId},
+            </if>
+            <if test="department != null">
+                deptId = #{department.id},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--查询总条数-->
+    <select id="queryForCount" resultType="int">
+        select count(*) from employee
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (name like concat('%',#{keyword},'%') or email like concat('%',#{keyword},'%'))
+            </if>
+            <if test="deptId != null">
+                and deptId = #{deptId}
+            </if>
+        </where>
+    </select>
+    <!-- 批量删除 -->
+    <delete id="deleteEmployees">
+        delete from
+        employee
+        where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+    <insert id="addEmployees" parameterType="java.util.List">
+        insert into employee(id,name,password,email,age,deptId,hireDate,state,admin,roleId) values
+        <foreach collection="list" item="emp" separator=",">
+            (#{emp.id},#{emp.name},#{emp.password},#{emp.email},#{emp.age},#{emp.deptId},#{emp.hireDate},#{emp.state},#{emp.admin},#{emp.roleId})
+        </foreach>
+    </insert>
+    <select id="selectAll" resultMap="baseResultMap">
+    select e.id,e.name,e.password,e.email,e.age,e.deptId,e.hireDate,e.state,e.admin,e.roleId,
+    d.id as d_id,d.name as d_name,d.sn as d_sn
+    from employee as e inner join department as d on e.deptId=d.id
+    </select>
+</mapper>

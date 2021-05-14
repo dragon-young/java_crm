@@ -5,6 +5,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * 自定义注解权限表达式
+ * @author FuqiangWu
+ */
 @Target(ElementType.METHOD)//贴在方法上
 @Retention(RetentionPolicy.RUNTIME)//运行时存在
 public @interface RequiredPermission {

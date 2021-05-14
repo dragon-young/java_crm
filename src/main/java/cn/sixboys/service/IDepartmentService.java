@@ -6,12 +6,11 @@ import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
 import org.springframework.stereotype.Component;
 
-<<<<<<< HEAD
+
 import java.util.List;
 
 
-=======
->>>>>>> authority
+
 @Component
 public interface IDepartmentService {
 

@@ -1,5 +1,9 @@
 package cn.sixboys.domain;
 
+/**
+ * 权限管理实体类
+ * @author FuqiangWu
+ */
 public class Permission {
     private Long id;
     private  String name;

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 分页实体类
  * @param <T>
- * @author mingjuntang
+ * @author FuqiangWu
  * @Data 2021/5/10 9:35
  */
 @Getter

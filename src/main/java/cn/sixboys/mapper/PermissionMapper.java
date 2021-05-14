@@ -20,6 +20,8 @@ public interface PermissionMapper {
      */
     List<String>selectAllExpreesion();
 
+    List<Permission>select();
+
     /**
      * 删除权限
      * @param id

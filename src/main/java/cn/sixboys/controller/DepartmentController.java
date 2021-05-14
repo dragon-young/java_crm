@@ -6,27 +6,28 @@ import cn.sixboys.domain.JsonResult;
 import cn.sixboys.service.IDepartmentService;
 import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
-<<<<<<< HEAD
-=======
+
+
 import cn.sixboys.util.RequiredPermission;
->>>>>>> authority
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-<<<<<<< HEAD
-import java.util.List;
-=======
->>>>>>> authority
 
+import java.util.List;
+
+/**
+ * 部门管理接口
+ * @author FuqiangWu
+ *
+ */
 @Controller
 @RequestMapping("/department")
 public class DepartmentController {
-<<<<<<< HEAD
 
-=======
->>>>>>> authority
+
     @Resource
     private IDepartmentService iDepartmentService;
 

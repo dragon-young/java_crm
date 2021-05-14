@@ -13,13 +13,21 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 部门管理实现类
+ * @author FuqiangWu
+ */
 @Service
 public class DepartmentServiceImpl implements IDepartmentService {
 
     @Autowired
     private DepartmentMapper departmentMapper;
 
-
+    /**
+     * 查询数量
+     * @param department
+     * @return
+     */
     @Override
     public int select(Department department) {
 
@@ -27,6 +35,10 @@ public class DepartmentServiceImpl implements IDepartmentService {
 
     }
 
+    /**
+     * 通过id删除信息
+     * @param id
+     */
     @Override
     public void delete(Long id) {
         departmentMapper.deleteByid(id);

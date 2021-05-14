@@ -11,11 +11,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
+/**
+ * 权限接口
+ * @author FuqiangWu
+ */
 @Controller
 @RequestMapping("/permission")
 public class PermissionController {
     @Autowired
     private IPermissionService permissionService;
+
+    /**
+     * 重新加载
+     * @return
+     */
 //处理权限加载请求
     @RequiredPermission(nane = "权限加载",expression = "permission:reload")
     @RequestMapping("/reload")
@@ -76,6 +87,18 @@ public class PermissionController {
             e.printStackTrace();
             return new JsonResult(false,"删除失败");
         }
+    }
+
+    /**
+     * 查询所有权限
+     * @return
+     */
+    @RequiredPermission(nane = "权限查询所有",expression = "permission:select")
+    @RequestMapping("/select")
+    @ResponseBody
+    public JsonResult select(){
+        List<Permission> allExpreesion = permissionService.select();
+        return new JsonResult(true,"查询成功",allExpreesion);
     }
 
 }

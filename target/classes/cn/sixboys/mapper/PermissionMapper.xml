@@ -9,7 +9,7 @@
     </insert>
     
     <select id="selectAllExpreesion" resultType="string">
-        select expression from permission
+        select  expression from permission
     </select>
 
     <delete id="deleteByid">
@@ -24,6 +24,10 @@
     <!--    查询当前页显示条数-->
     <select id="queryForList" resultType="permission">
         SELECT * FROM permission LIMIT #{start}, #{pageSize}
+    </select>
+
+    <select id="select" resultType="permission">
+        select * from permission
     </select>
 
 </mapper>

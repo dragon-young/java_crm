@@ -4,6 +4,8 @@ import cn.sixboys.domain.Permission;
 import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
 
+import java.util.List;
+
 public interface IPermissionService {
 
     void reload();
@@ -16,5 +18,9 @@ public interface IPermissionService {
      * @return
      */
     PageResult<Permission> query(QueryObject queryObject);
+
+
+
+    List<Permission>select();
 
 }

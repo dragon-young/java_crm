@@ -74,4 +74,11 @@ public class PermissionServiceImpl implements IPermissionService {
         return new PageResult<>(queryObject.getCurrentPage(),queryObject.getPageSize(),totalCount,permissions);
 
     }
+
+    @Override
+    public List<Permission> select() {
+        List<Permission> permissions = permissionMapper.select();
+        return permissions;
+    }
+
 }
