@@ -12,8 +12,6 @@
             <result column="b_name" property="name"/>
             <result column="b_expression" property="expression"/>
         </collection>
-
-
     </resultMap>
     <select id="queryForList" resultMap="baseResultMap">
         SELECT a.id,a.sn,a.name,b.id AS b_id,b.name AS b_name,b.expression AS b_expression
@@ -80,5 +78,7 @@
     <select id="selectGetId" resultType="Long">
         select id from role where name = #{name} and sn = #{sn}
     </select>
-
+    <select id="selectAll" resultType="role">
+        select id,name from role
+    </select>
 </mapper>

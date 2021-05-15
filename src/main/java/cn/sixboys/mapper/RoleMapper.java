@@ -64,4 +64,10 @@ public interface RoleMapper {
      * @return
      */
     Long selectGetId(Role role);
+
+    /**
+     * 查询所有角色
+     * @return
+     */
+    List<Role> selectAll();
 }

@@ -17,11 +17,15 @@
         <result column="d_id" property="department.id"/>
         <result column="d_name" property="department.name"/>
         <result column="d_sn" property="department.sn"/>
+        <result column="r_id" property="role.id"/>
+        <result column="r_sn" property="role.sn"/>
+        <result column="r_name" property="role.name"/>
     </resultMap>
     <select id="queryForList" resultMap="baseResultMap">
         select e.id,e.name,e.password,e.email,e.age,e.deptId,e.hireDate,e.state,e.admin,e.roleId,
-        d.id as d_id,d.name as d_name,d.sn as d_sn
-        from employee as e inner join department as d on e.deptId=d.id
+        d.id as d_id,d.name as d_name,d.sn as d_sn,r.id as r_id,r.sn as r_sn,r.name as r_name
+        from employee as e left join department as d on e.deptId=d.id
+            left join role as r on e.roleId=r.id
         <where>
             <if test="keyword != null and keyword != ''">
                 (e.name like concat('%',#{keyword},'%') or e.email like concat('%',#{keyword},'%'))

@@ -31,4 +31,5 @@ public class Employee {
     private Integer roleId;
     //关联属性
     private Department department;
+    private Role role;
 }

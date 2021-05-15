@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sixboys.mapper.CustomerMapper">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into customer (id, name, age, gender, tel, qq, jobId, sourceId, sellerId, inputUserId, inputTime, status,
+                              positiveTime)
+        values (#{id},#{name},#{age},#{genser},#{tel},#{qq},#{jobId},#{sourceId},#{sellerId},#{inputUserId},#{inputTimr},#{status},#{positiveTime});
+    </insert>
+    <delete id="delete">
+        delete from  customer where id = #{id}
+    </delete>
+    <update id="update">
+        update customer
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="age != null and age != ''">
+                age = #{age},
+            </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+            <if test="tel != null and tel != ''">
+                tel = #{tel},
+            </if>
+            <if test="qq != null and qq != ''">
+                qq = #{qq},
+            </if>
+            <if test="jobId != null and jobId != ''">
+                jobId = #{jobId},
+            </if>
+            <if test="sourceId != null and sourceId != ''">
+                sourceId = #{sourceId},
+            </if>
+            <if test="sellerId != null and sellerId != ''">
+                sellerId = #{sellerId},
+            </if>
+            <if test="inputUserId != null and inputUserId != ''">
+                inputUserId = #{inputUserId},
+            </if>
+            <if test="inputTime != null and inputTime != ''">
+                inputTime = #{inputTime},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="positiveTime != null and positiveTime != ''">
+                positiveTime = #{positiveTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <resultMap id="baseResultMap" type="customer">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="gender" property="gender"/>
+        <result column="tel" property="tel"/>
+        <result column="qq" property="qq"/>
+        <result column="jobId" property="jobId"/>
+        <result column="sourceId" property="sourceId"/>
+        <result column="sellerId" property="sellerId"/>
+        <result column="inputUserId" property="inputUserId"/>
+        <result column="inputTime" property="inputTime"/>
+        <result column="status" property="status"/>
+        <result column="positiveTime" property="positiveTime"/>
+        <result column="name" property="name"/>
+        <result column="name" property="name"/>
+        <result column="name" property="name"/>
+    </resultMap>
+</mapper>

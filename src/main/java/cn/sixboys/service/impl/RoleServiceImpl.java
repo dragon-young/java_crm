@@ -1,6 +1,7 @@
 package cn.sixboys.service.impl;
 
 import cn.sixboys.domain.Department;
+import cn.sixboys.domain.JsonResult;
 import cn.sixboys.domain.Role;
 import cn.sixboys.domain.Role_Permissiion;
 import cn.sixboys.mapper.RoleMapper;
@@ -71,5 +72,11 @@ public class RoleServiceImpl implements IRoleService {
     public Long selectGetId(Role role) {
         Long getId = roleMapper.selectGetId(role);
         return getId;
+    }
+
+    @Override
+    public List<Role> selectAll() {
+        List<Role> roles = roleMapper.selectAll();
+        return roles;
     }
 }
