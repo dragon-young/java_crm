@@ -16,6 +16,13 @@ import java.util.List;
 public class DictionaryServiceImpl implements IDictionaryService {
     @Autowired
     private DictionaryMapper dictionaryMapper;
+
+    @Override
+    public List<Dictionary> selectAll(Dictionary dictionary) {
+        List<Dictionary> dictionaries = dictionaryMapper.selectAll(dictionary);
+        return dictionaries;
+    }
+
     @Override
     public void delete(Long id) {
         dictionaryMapper.deleteByid(id);

@@ -11,6 +11,8 @@ import java.util.List;
  * @author FuqiangWu
  */
 public interface DictionaryMapper {
+
+    List<Dictionary>selectAll(Dictionary dictionary);
     /**
      * 通过id删除信息
      * @param id
@@ -42,4 +44,6 @@ public interface DictionaryMapper {
      * @return
      */
     List<Dictionary> queryForList(QueryObject queryObject);
+
+    List<Dictionary> queryForListById(QueryObject queryObject,Long id);
 }

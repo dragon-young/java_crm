@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sixboys.mapper.DictionarydetailsMapper">
+<!--    <resultMap id="baseResultMap" type="dictionarydetails">-->
+<!--        <id property="id" column="id"/>-->
+<!--        <result column="title" property="title"/>-->
+<!--        <result column="sequence" property="sequence"/>-->
+<!--        <result column="dictionaryId" property="dictionary.id"/>-->
+<!--        <collection property="dictionary" ofType="cn.sixboys.domain.Dictionary">-->
+<!--            <result column="b_id" property="id"/>-->
+<!--            <result column="sn" property="sn"/>-->
+<!--            <result column="b_title" property="title"/>-->
+<!--            <result column="intro" property="intro"/>-->
+<!--        </collection>-->
+
+
+<!--    </resultMap>-->
+    <select id="selectAll" resultType="dictionarydetails">
+        select * from dictionarydetails;
+    </select>
+
+<!--    <select id="selectById" resultType="dictionarydetails">-->
+<!--        SELECT a.id AS a_id,a.title AS a_title,a.sequence,a.dictionaryId,b.id AS b_id,b.sn,b.title AS b_title,b.intro-->
+<!--        FROM dictionarydetails AS a-->
+<!--                 INNER JOIN dictionary AS b-->
+<!--                            ON a.dictionaryId = b.id-->
+<!--        WHERE a.dictionaryId = #{dictionary.id}-->
+
+<!--    </select>-->
+
+    <select id="queryForListById" resultType="dictionarydetails">
+        SELECT * from dictionarydetails
+        <where>
+            <if test="dictionaryId != null and dictionaryId != ''">
+                dictionaryId = #{dictionaryId}
+            </if>
+        </where>
+        LIMIT #{start}, #{pageSize}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="dictionarydetails">
+        insert into dictionarydetails(title, sequence, dictionaryId) VALUES (#{title},#{sequence},#{dictionaryId})
+    </insert>
+
+    <delete id="delete">
+        delete from dictionarydetails where id = #{id}
+    </delete>
+
+    <update id="update">
+        update dictionarydetails
+        <set>
+            <if test="title!=null">
+                title =#{title},
+            </if>
+            <if test="sequence!=null">
+                sequence =#{sequence},
+            </if>
+            <if test="dictionaryId!=null">
+                dictionaryId =#{dictionaryId}
+            </if>
+
+        </set>
+        where id =#{id}
+    </update>
+
+    <!--查询总条数-->
+    <select id="queryForCount" resultType="int">
+        select count(*) from dictionarydetails
+
+    </select>
+
+    <!--    查询当前页显示条数-->
+    <select id="queryForList" resultType="dictionary">
+        SELECT * FROM dictionarydetails
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (title like concat('%',#{keyword},'%') or sequence like concat('%',#{keyword},'%'))
+            </if>
+        </where>
+        LIMIT #{start}, #{pageSize}
+    </select>
+
+</mapper>

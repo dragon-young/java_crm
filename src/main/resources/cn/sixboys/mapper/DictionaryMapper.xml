@@ -4,7 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sixboys.mapper.DictionaryMapper">
 
-
+    <select id="selectAll" resultType="dictionary">
+        select * from dictionary
+    </select>
     <delete id="deleteByid">
         delete from dictionary where id= #{id}
     </delete>
@@ -53,7 +55,5 @@
 
 
 
-    <select id="selectAll" resultType="dictionary">
-        select id, sn, title, intro from dictionary
-    </select>
+
 </mapper>

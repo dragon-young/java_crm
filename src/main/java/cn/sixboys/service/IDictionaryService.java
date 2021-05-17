@@ -5,7 +5,10 @@ import cn.sixboys.domain.Dictionary;
 import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
 
+import java.util.List;
+
 public interface IDictionaryService {
+    List<Dictionary> selectAll(Dictionary dictionary);
     void delete (Long id);
 
     void input(Dictionary dictionary);

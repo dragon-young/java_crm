@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * 字典接口
  * @author FuqiangWu
@@ -21,6 +23,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class DictionaryController {
     @Autowired
     private IDictionaryService dictionaryService;
+    @RequestMapping("/selectAll")
+    @ResponseBody
+    public  JsonResult selectAll(Dictionary dictionary){
+        List<Dictionary> dictionaries = dictionaryService.selectAll(dictionary);
+        return new JsonResult(true,"查询成功",dictionaries);
+
+    }
 
     /**
      * 删除
