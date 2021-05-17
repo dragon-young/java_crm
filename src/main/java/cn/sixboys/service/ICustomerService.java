@@ -1,21 +1,17 @@
-package cn.sixboys.mapper;
+package cn.sixboys.service;
 
 import cn.sixboys.domain.Customer;
+import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
 
 import java.util.List;
 
 /**
  * @author mingjuntang
- * @Data 2021/5/14 21:49
+ * @Data 2021/5/15 17:47
  */
-public interface CustomerMapper {
-    /**
-     * 分页查询
-     * @param queryObject
-     * @return
-     */
-    List<Customer> queryForList(QueryObject queryObject);
+public interface ICustomerService {
+    PageResult<Customer> selectCustomers(QueryObject queryObject);
 
     /**
      * 新增一条客户数据
@@ -29,8 +25,4 @@ public interface CustomerMapper {
      */
     void update(Customer customer);
 
-    /**
-     * 查询总记录数
-     */
-    int queryForCount(QueryObject queryObject);
 }

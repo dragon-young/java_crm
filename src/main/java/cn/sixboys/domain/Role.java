@@ -18,7 +18,4 @@ public class Role {
     private String sn;
     private String name;
     private List<Permission> permissions;
-
-
-
 }

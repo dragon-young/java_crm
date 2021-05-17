@@ -28,7 +28,6 @@
 
     <insert id="insert"  useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into role(id, sn, name) VALUE (#{id},#{sn},#{name})
-
     </insert>
 
     <insert id="input" parameterType="java.util.List">
@@ -78,6 +77,7 @@
     <select id="selectGetId" resultType="Long">
         select id from role where name = #{name} and sn = #{sn}
     </select>
+
     <select id="selectAll" resultType="role">
         select id,name from role
     </select>

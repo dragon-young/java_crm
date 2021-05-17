@@ -13,12 +13,6 @@ import java.util.List;
  * @Data 2021/5/9 14:42
  */
 public interface EmployeeMapper {
-    /**
-     * 通过条件查询员工信息
-     * @param queryObject
-     * @return
-     */
-    List<Employee> selectEmployee(QueryObject queryObject);
 
     /**
      * 通过id,删除员工数据

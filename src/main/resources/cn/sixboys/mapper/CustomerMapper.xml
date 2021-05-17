@@ -6,7 +6,7 @@
     <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into customer (id, name, age, gender, tel, qq, jobId, sourceId, sellerId, inputUserId, inputTime, status,
                               positiveTime)
-        values (#{id},#{name},#{age},#{genser},#{tel},#{qq},#{jobId},#{sourceId},#{sellerId},#{inputUserId},#{inputTimr},#{status},#{positiveTime});
+        values (#{id},#{name},#{age},#{gender},#{tel},#{qq},#{jobId},#{sourceId},#{sellerId},#{inputUserId},#{inputTime},#{status},#{positiveTime});
     </insert>
     <delete id="delete">
         delete from  customer where id = #{id}
@@ -20,7 +20,7 @@
             <if test="age != null and age != ''">
                 age = #{age},
             </if>
-            <if test="gender != null and gender != ''">
+            <if test="gender == 0 or gender == 1">
                 gender = #{gender},
             </if>
             <if test="tel != null and tel != ''">
@@ -67,8 +67,32 @@
         <result column="inputTime" property="inputTime"/>
         <result column="status" property="status"/>
         <result column="positiveTime" property="positiveTime"/>
-        <result column="name" property="name"/>
-        <result column="name" property="name"/>
-        <result column="name" property="name"/>
+        <result column="e_id" property="employee.id"/>
+        <result column="e_name" property="employee.name"/>
     </resultMap>
+    <select id="queryForList" resultMap="baseResultMap">
+        select c.id,c.name,c.age,c.gender,c.tel,c.qq,c.jobId,c.sourceId,c.sellerId,c.inputUserId,c.inputTime,c.status,c.positiveTime,
+        e.id as e_id,e.name as e_name
+        from customer as c inner join employee as e on c.inputUserId=e.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (c.name like concat('%',#{keyword},'%') or c.tel like concat('%',#{keyword},'%'))
+            </if>
+            <if test="status != null">
+                and c.status = #{status}
+            </if>
+        </where>
+        LIMIT #{start}, #{pageSize}
+    </select>
+    <select id="queryForCount" resultType="int">
+        select count(*) from customer
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (name like concat('%',#{keyword},'%') or tel like concat('%',#{keyword},'%'))
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
 </mapper>

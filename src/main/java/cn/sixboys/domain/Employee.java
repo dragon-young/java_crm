@@ -9,6 +9,7 @@ import lombok.ToString;
 import java.util.Date;
 
 /**
+ * 员工类实体对象
  * @author mingjuntang
  * @Data 2021/5/9 14:38
  */
