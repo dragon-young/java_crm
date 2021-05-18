@@ -117,6 +117,12 @@ public class RoleController {
         }
         roleService.input(role_permissiionList);
         return new JsonResult(true,"修改成功");
+    }
 
+    @RequestMapping("selectAll")
+    @ResponseBody
+    public JsonResult selectAll(){
+        List<Role> roles = roleService.selectAll();
+        return new JsonResult(true,"查询成功",roles);
     }
 }

@@ -28,5 +28,9 @@ public interface IRoleService {
 
     Long selectGetId(Role role);
 
-
+    /**
+     * 查询所有角色
+     * @return
+     */
+    List<Role> selectAll();
 }

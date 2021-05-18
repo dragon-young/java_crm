@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sixboys.mapper.TransRecordMapper">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into transRecord (id, customerId, transUser, transTime, oldSeller, newSellerId, transReason)
+        values (#{id},#{customerId},#{transUser},#{transTime},#{oldSeller},#{newSellerId},#{transReason});
+    </insert>
+    <resultMap id="baseResultMap" type="transRecord">
+        <id column="id" property="id"/>
+        <result column="customerId" property="customerId"/>
+        <result column="transUser" property="transUser"/>
+        <result column="transTime" property="transTime"/>
+        <result column="oldSeller" property="oldSeller"/>
+        <result column="newSellerId" property="newSellerId"/>
+        <result column="transReason" property="transReason"/>
+        <result column="c_id" property="customer.id"/>
+        <result column="c_name" property="customer.name"/>
+        <result column="e_id" property="employee.id"/>
+        <result column="e_name" property="employee.name"/>
+    </resultMap>
+    <select id="queryForCount" resultMap="baseResultMap">
+        select t.id,t.customerId,t.transUser,t.transTime,t.oldSeller,t.newSellerId,t.transReason,c.id as c_id,c.name as c_name,
+               e.id as e_id,e.name as e_name
+        from transRecord as t inner join customer as c on t.customerId=c.id
+        inner join employee as e on e.id=t.newSellerId
+        <where>
+            <if test="keyword != null and keyword != ''">
+                c.name like concat('%',#{keyword},'%')
+            </if>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and (t.traceTime between #{startTime} and #{endTime})
+            </if>
+        </where>
+        LIMIT #{start}, #{pageSize}
+    </select>
+    <select id="queryForCount" resultType="int">
+        select count(*) from transRecord
+        <where>
+            <if test="keyword != null and keyword != ''">
+                c.name like concat('%',#{keyword},'%')
+            </if>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and (t.traceTime between #{startTime} and #{endTime})
+            </if>
+        </where>
+    </select>
+</mapper>

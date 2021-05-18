@@ -1,18 +1,22 @@
 package cn.sixboys.controller;
 
+import cn.sixboys.controller.excelListener.EmployeeListener;
 import cn.sixboys.domain.Employee;
 import cn.sixboys.domain.JsonResult;
-import cn.sixboys.service.IDepartmentService;
 import cn.sixboys.service.IEmployeeService;
 import cn.sixboys.util.PageResult;
 import cn.sixboys.util.QueryObject;
 import cn.sixboys.util.RequiredPermission;
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.read.builder.ExcelReaderBuilder;
+import com.alibaba.excel.read.builder.ExcelReaderSheetBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -26,7 +30,7 @@ public class EmployeeController {
     @Resource
     private IEmployeeService employeeService;
     @Resource
-    private IDepartmentService departmentService;
+    private EmployeeListener employeeListener;
     @RequiredPermission(nane = "员工页面",expression = "employee:query")
     @RequestMapping("/query")
     @ResponseBody
@@ -82,10 +86,13 @@ public class EmployeeController {
         return new JsonResult(true,"删除成功");
     }
 
-    @RequestMapping("/inputEmployees")
+    @RequestMapping("/importEmployees")
     @ResponseBody
-    public JsonResult inputEmployees(List<Employee> employees){
-        employeeService.addEmployees(employees);
+    public JsonResult importEmployees(MultipartFile uploadFile)throws Exception{
+        InputStream inputStream = uploadFile.getInputStream();
+        ExcelReaderBuilder workbook = EasyExcel.read(inputStream, Employee.class, employeeListener);
+        ExcelReaderSheetBuilder sheet = workbook.sheet();
+        sheet.doRead();
         return new JsonResult(true,"插入成功");
     }
     @RequestMapping("/selectAll")
@@ -94,5 +101,4 @@ public class EmployeeController {
         List<Employee> employees = employeeService.selectAll(employee);
         return new JsonResult(true,"查询成功",employees);
     }
-
 }

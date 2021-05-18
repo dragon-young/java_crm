@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sixboys.mapper.TraceRecordMapper">
+    <resultMap id="baseResultMap" type="traceRecord">
+        <id column="id" property="id"/>
+        <result column="traceTime" property="traceTime"/>
+        <result column="traceDetails" property="traceDetails"/>
+        <result column="traceTypeId" property="traceTypeId"/>
+        <result column="traceResult" property="traceResult"/>
+        <result column="remarks" property="remarks"/>
+        <result column="customerId" property="customerId"/>
+        <result column="inputUserId" property="inputUserId"/>
+        <result column="type" property="type"/>
+        <result column="c_id" property="customer.id"/>
+        <result column="c_name" property="customer.name"/>
+    </resultMap>
+    <select id="queryForList" resultMap="baseResultMap">
+        select t.id,t.traceTime,t.traceDetails,t.traceResult,t.remarks,t.customerId,t.inputUserId,t.type,c.id as c_id,c.name as c_name
+        from traceRecord as t inner join customer as c on t.customerId=c.id
+        <where>
+            <if test="keyword != null and keyword != ''">
+                c.name like concat('%',#{keyword},'%')
+            </if>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and (t.traceTime between #{startTime} and #{endTime})
+            </if>
+            <if test="type != null">
+                and t.type = #{type}
+            </if>
+        </where>
+        LIMIT #{start}, #{pageSize}
+    </select>
+    <select id="queryForCount" resultType="int">
+        select count(*) from traceRecord
+        <where>
+            <if test="keyword != null and keyword != ''">
+                c.name like concat('%',#{keyword},'%')
+            </if>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and (t.traceTime between #{startTime} and #{endTime})
+            </if>
+            <if test="type != null">
+                and t.type = #{type}
+            </if>
+        </where>
+    </select>
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into traceRecord (id, traceTime, traceDetails, traceTypeId, traceResult, remarks, customerId, inputUserId, type)
+        values (#{id},#{traceTime},#{traceDetails},#{traceTypeId},#{traceResult},#{remarks},#{customerId},#{inputUserId},#{type})
+    </insert>
+</mapper>
