@@ -6,7 +6,7 @@
             <el-breadcrumb-item><a href="/">系统管理</a></el-breadcrumb-item>
             <el-breadcrumb-item>员工管理</el-breadcrumb-item>
         </el-breadcrumb>
-        <el-card class="box-card">
+        <el-card class="box-card" style="min-width: 1200px">
             <div slot="header" class="clearfix">
                 <span>员工管理</span>
             </div>
@@ -32,13 +32,13 @@
                 :data="tableData"
                 @selection-change="handleSelectionChange"
                 stripe
-                style="width: 100%">
+                style="width: 100%;">
                  <el-table-column
                 type="selection"
                 width="55">
                 </el-table-column>
                 <el-table-column
-                prop="id"
+                type="index"
                 label="编号"
                 width="180">
                 </el-table-column>
@@ -58,6 +58,12 @@
                 <el-table-column
                 prop="department.name"
                 label="部门">
+                </el-table-column>
+                <el-table-column
+                label="角色">
+                <template slot-scope="scope">
+                    <el-tag type="success">{{scope.row.role === null ? '未分配角色' : scope.row.role.name}}</el-tag>
+                  </template>
                 </el-table-column>
                 <el-table-column
                 label="操作">
@@ -112,7 +118,9 @@
                     <el-checkbox v-model="addEmployeeForm.admin">是否为管理员</el-checkbox>
                 </el-form-item>
                 <el-form-item label="分配角色：">
-                    <el-transfer v-model="value" :data="addEmployeeForm.role"></el-transfer>
+                    <el-transfer
+                    :props="{ key: 'id', label: 'name' }"
+                    v-model="addEmployeeForm.value" :data="roleData"></el-transfer>
                 </el-form-item>
           </el-form>
           <span slot="footer" class="dialog-footer">
@@ -128,7 +136,10 @@
 
           <el-upload
             class="upload-demo"
-            action="https://jsonplaceholder.typicode.com/posts/"
+            method="post"
+            name="uploadFile"
+            accept=".xls,.xlsx"
+            action="http://192.168.137.1:8080/employee/importEmployees"
             :file-list="fileList"
             ref="upload"
             :auto-upload="false"
@@ -150,7 +161,17 @@ export default {
   data () {
     return {
       // 表头数据
-      column: [{ title: '编号', key: 'id' }, { title: '名称', key: 'name' }, { title: 'email', key: 'email' }, { title: '年龄', key: 'age' }, { title: '部门', key: 'deptId' }],
+      column: [
+        { title: 'name', key: 'name' },
+        { title: 'email', key: 'email' },
+        { title: 'password', key: 'password' },
+        { title: 'age', key: 'age' },
+        { title: 'deptId', key: 'deptId' },
+        { title: 'hireDate', key: 'hireDate' },
+        { title: 'state', key: 'state' },
+        { title: 'admin', key: 'admin' },
+        { title: 'roleId', key: 'roleId' }
+      ],
       // 关键字内容
       keyscontent: '',
       // 下拉菜单
@@ -163,7 +184,7 @@ export default {
       // 分页信息
       pageNum: {
         currentPage: 1,
-        pageSize: 4,
+        pageSize: 8,
         totalCount: 0
       },
       // 新增员工对话框
@@ -172,13 +193,15 @@ export default {
       addEmployeeForm: {},
       departments: [],
       // 分配角色
-      value: [1, 4],
+      value: [],
       // 需要删除的项
       deleteItem: [],
       // 导入员工对话框
       importEmployeeDialog: false,
       // 需要导入的excel表格
-      fileList: []
+      fileList: [],
+      // 获取角色信息
+      roleData: []
     }
   },
   mounted () {
@@ -222,24 +245,33 @@ export default {
     async deleteEmployee (id) {
       const { data: res } = await this.$http.get(`employee/delete?id=${id}`)
       if (!res.success) return this.$message.error('删除员工失败')
+      this.$message.success('删除员工成功')
       this.getEmployeeInfo()
     },
     // 添加部门之前需要做的事情
     async addEmployeeBefore () {
       this.addEmployeeDialog = true
       const { data: res } = await this.$http.get('department/selectAll')
+      // 获取角色信息
+      const { data: res2 } = await this.$http.get('role/selectAll')
+      this.roleData = res2.data
       this.departments = res.data
     },
     // 提交数据的事情
     async addEmployee () {
-      await this.$http.get(`employee/input?name=${this.addEmployeeForm.name}&email=${this.addEmployeeForm.email}
+      const { data: res } = await this.$http.get(`employee/input?name=${this.addEmployeeForm.name}&email=${this.addEmployeeForm.email}
       &age=${this.addEmployeeForm.age}&deptId=${this.addEmployeeForm.deptId}&state=${this.addEmployeeForm.state}&admin=${this.addEmployeeForm.admin === true ? 1 : 0}`)
-      this.getEmployeeInfo()
       this.addEmployeeDialog = false
+      if (!res.success) return this.$message.error('添加用户失败')
+      this.$message.success('添加用户成功')
+      const { data: res2 } = await this.$http.get(`employee/query?currentPage=${this.pageNum.totalPage}&pageSize=${this.pageNum.pageSize}`)
+      this.tableData = res2.data.data
+      this.pageNum = res2.data
     },
     // 将员工数据导出到Excel表中
     async exportEmployee () {
       const { data: res } = await this.$http.get('employee/selectAll')
+      console.log(res)
       export2Excel(this.column, res.data)
     },
     async deleteManyEmployee () {

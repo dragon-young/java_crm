@@ -28,110 +28,69 @@
                             <i class="el-icon-s-home"></i>
                             <span>系统管理</span>
                         </template>
-                        <el-menu-item-group>
-                            <el-menu-item index="/sys/department">
-                               <i class="el-icon-bangzhu"></i> 部门管理
+                        <el-menu-item index="/sys/department">
+                            <i class="el-icon-bangzhu"></i> 部门管理
+                        </el-menu-item>
+                        <el-menu-item index="/sys/employee">
+                            <i class="el-icon-bangzhu"></i>员工管理
+                        </el-menu-item>
+                        <el-menu-item index="/sys/authority">
+                            <i class="el-icon-bangzhu"></i>权限管理
                             </el-menu-item>
-                            <el-menu-item index="/sys/employee">
-                                <i class="el-icon-bangzhu"></i>员工管理
-                            </el-menu-item>
-                            <el-menu-item index="/sys/authority">
-                                <i class="el-icon-bangzhu"></i>权限管理
-                                </el-menu-item>
-                            <el-menu-item index="/sys/role">
-                                <i class="el-icon-bangzhu"></i>角色管理
-                            </el-menu-item>
-                        </el-menu-item-group>
+                        <el-menu-item index="/sys/role">
+                            <i class="el-icon-bangzhu"></i>角色管理
+                        </el-menu-item>
                     </el-submenu>
-                    <el-submenu index="2">
+                    <el-submenu index="/data">
                         <template slot="title">
                             <i class="el-icon-s-data"></i>
                             <span>数据管理</span>
                         </template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="1-1">选项1</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="分组2">
-                            <el-menu-item index="1-3">选项3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-submenu index="1-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="1-4-1">选项1</el-menu-item>
-                        </el-submenu>
+                        <el-menu-item index="/sys/dataDictionary">
+                            <i class="el-icon-bangzhu"></i> 数据字典管理
+                        </el-menu-item>
+                        <el-menu-item index="/sys/dataDictionaryDetails">
+                            <i class="el-icon-bangzhu"></i>数据字典明细管理
+                        </el-menu-item>
                     </el-submenu>
-                    <el-submenu index="3">
+                    <el-submenu index="/client">
                         <template slot="title">
                             <i class="el-icon-picture-outline-round"></i>
                             <span>客户管理</span>
                         </template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="1-1">选项1</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="分组2">
-                            <el-menu-item index="1-3">选项3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-submenu index="1-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="1-4-1">选项1</el-menu-item>
-                        </el-submenu>
+                        <el-menu-item index="/sys/clientManager">
+                            <i class="el-icon-bangzhu"></i>潜在客户管理
+                        </el-menu-item>
+                        <el-menu-item index="/sys/formalClientManager">
+                            <i class="el-icon-bangzhu"></i>正式客户管理
+                        </el-menu-item>
                     </el-submenu>
                     <el-submenu index="4">
                         <template slot="title">
                             <i class="el-icon-bank-card"></i>
                             <span>客户历史</span>
                         </template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="1-1">选项1</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="分组2">
-                            <el-menu-item index="1-3">选项3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-submenu index="1-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="1-4-1">选项1</el-menu-item>
-                        </el-submenu>
+                        <el-menu-item index="/sys/followUpHistory">
+                            <i class="el-icon-bangzhu"></i>跟进历史管理
+                        </el-menu-item>
                     </el-submenu>
                     <el-submenu index="5">
                         <template slot="title">
                             <i class="el-icon-location"></i>
                             <span>移交历史</span>
                         </template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="1-1">选项1</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="分组2">
-                            <el-menu-item index="1-3">选项3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-submenu index="1-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="1-4-1">选项1</el-menu-item>
-                        </el-submenu>
+                        <el-menu-item index="/sys/transferHistory">
+                            <i class="el-icon-bangzhu"></i>移交历史管理
+                        </el-menu-item>
                     </el-submenu>
                     <el-submenu index="6">
                         <template slot="title">
                             <i class="el-icon-document-copy"></i>
                             <span>报表统计</span>
                         </template>
-                        <el-menu-item-group>
-                            <template slot="title">分组一</template>
-                            <el-menu-item index="1-1">选项1</el-menu-item>
-                            <el-menu-item index="1-2">选项2</el-menu-item>
-                        </el-menu-item-group>
-                        <el-menu-item-group title="分组2">
-                            <el-menu-item index="1-3">选项3</el-menu-item>
-                        </el-menu-item-group>
-                        <el-submenu index="1-4">
-                            <template slot="title">选项4</template>
-                            <el-menu-item index="1-4-1">选项1</el-menu-item>
-                        </el-submenu>
+                        <el-menu-item index="/sys/echarts">
+                            <i class="el-icon-bangzhu"></i>潜在客户报表
+                        </el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-aside>

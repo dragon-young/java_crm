@@ -39,7 +39,9 @@ import
   Checkbox,
   Transfer,
   Radio,
-  Upload
+  Upload,
+  Tag,
+  Image
 }
   from 'element-ui'
 
@@ -82,3 +84,5 @@ Vue.use(Checkbox)
 Vue.use(Transfer)
 Vue.use(Radio)
 Vue.use(Upload)
+Vue.use(Tag)
+Vue.use(Image)

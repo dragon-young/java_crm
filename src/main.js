@@ -8,6 +8,11 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://192.168.137.1:8080'
 axios.defaults.withCredentials = false
 
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
+
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
